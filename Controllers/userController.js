@@ -56,10 +56,7 @@ exports.giveSecret = async (req, res) => {
 exports.validar = async (req, res, next) => {
     try{
         const secretUssBD = await User.findOne({ projection: {secret:1}});
-        
-        //console.log(secretUssBD.secret);
-        //console.log('ddddddddddddd');
-        
+
         if(secretUssBD == null) {
             res.status(400).send('OTP no encontrada!') 
         }
