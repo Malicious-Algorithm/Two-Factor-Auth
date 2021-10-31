@@ -2,7 +2,7 @@ POST http://localhost:4000/api/user/otp-secret
 Content-Type: application/json
 
 {
-    "name": "bbbbbbbbbbbbbbb",
+    "name": "fffffffffff",
     "password": "2123123123"
 }
 
@@ -12,6 +12,6 @@ POST http://localhost:4000/api/user/otp-validar
 Content-Type: application/json
 
 {
-    "name": "bbbbbbbbbbbbbbb",
-    "token": "195308"
+    "name": "fffffffffff",
+    "token": "6154647"
 }

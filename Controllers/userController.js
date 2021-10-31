@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const Joi = require('@hapi/joi');
 const User = require('../Models/User');
 const speakEasy = require('speakeasy');
+const qrcode = require('qrcode');
 
 //---------------- Validar Campos Joi ------------//
 const schemaValidate = Joi.object({
@@ -21,25 +22,32 @@ exports.giveSecret = async (req, res) => {
     }
 
     try{
-        console.log('asd');
-        const secret = speakEasy.generateSecret().base32;
+    
+        const secret = speakEasy.generateSecret();
         const salt = await bcrypt.genSalt();
         const hashPass = await bcrypt.hash(req.body.password, salt);
-
+        
         const user = {
             name: req.body.name,
             password: hashPass,
-            secret: secret
+            secret: secret.base32
         };
 
         let userModel = new User(user);
         await userModel.save();
 
         let exp = (30 - Math.floor((new Date().getTime() / 1000.0 % 30)));
-        
+        const genCode = qrcode.toDataURL(secret.otpauth_url, (err, data_url) =>{
+            try{
+                console.log(data_url)
+            }catch(err){
+                console.log(err)
+            }
+        })
         res.json({
             secret: secret,
-            expira: exp 
+            expira: exp,
+            gencode: genCode
         });
         
 
@@ -63,7 +71,7 @@ exports.validar = async (req, res, next) => {
 
         const verif = speakEasy.totp.verify({
             secret: secretUssBD.secret,
-            encoding: "base32",
+            encoding: 'base32',
             token: req.body.token, //este es el OTP que nos va a pasar el user
             window: 0 //le damos un par mas de tiempo al usuario por si no llegó a poner el OTP
         });
