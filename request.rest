@@ -1,8 +1,8 @@
-POST http://localhost:4000/api/user/otp-secret
+POST https://doblefactor-api.herokuapp.com/api/user/otp-secret
 Content-Type: application/json
 
 {
-    "name": "fffffffffff",
+    "name": "aaaaa",
     "password": "2123123123"
 }
 
