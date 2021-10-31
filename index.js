@@ -4,7 +4,7 @@ const app = Express();
 const conectarDB = require('./DB/db');
 const cors = require('cors');
 
-const PORT = 4000 || process.env.PUERTO;
+const PORT = 4000;
 
 var corsOpt = {
     origin: '*', //poner nuestro dominio
@@ -20,4 +20,4 @@ const twoFARoutes = require('./Routes/autenticar');
 
 app.use('/api/user', twoFARoutes);
 
-app.listen(PORT)
+app.listen(process.env.PUERTO || PORT)
