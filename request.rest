@@ -1,4 +1,4 @@
-POST https://doblefac-api.herokuapp.com/api/user/otp-secret
+POST https://git.heroku.com/doblefactor-api.git/api/user/otp-secret
 Content-Type: application/json
 
 {
