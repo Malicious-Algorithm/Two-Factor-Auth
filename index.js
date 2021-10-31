@@ -20,6 +20,4 @@ const twoFARoutes = require('./Routes/autenticar');
 
 app.use('/api/user', twoFARoutes);
 
-app.listen(PORT, () =>{
-    console.log("Server up");
-});
+app.listen(PORT)
